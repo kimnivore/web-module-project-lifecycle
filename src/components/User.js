@@ -2,15 +2,15 @@ import React from 'react';
 
 class User extends React.Component {
     render() {
+        const {userInfo } = this.props;
         return(
             <div className='user'>
-                <img width='200' src={this.props.avatar_url} />
-                <a href={this.props.html_url}> <p>{this.props.name}</p></a>
                 <div>
-                    {/* <p>{this.props.name}</p> */}
-                    <p>({this.props.login})</p>
-                    <p>Total Repos: {this.props.public_repos}</p>
-                    <p>Total Followers: {this.props.followers}</p>
+                    <img width='200' src={userInfo.avatar_url} />
+                    <a href={userInfo.html_url}> <h3>{userInfo.name}</h3></a>
+                    <p>({userInfo.login})</p>
+                    <p>Total Repos: {userInfo.public_repos}</p>
+                    <p>Total Followers: {userInfo.followers}</p>
                 </div>
             </div>
         )
