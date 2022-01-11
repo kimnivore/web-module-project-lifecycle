@@ -2,61 +2,70 @@ import React from 'react';
 import axios from 'axios';
 import User from './components/User'
 import FollowerList from './components/FollowerList'
-
 import './index.css'
 
 class App extends React.Component {
   state = {
-    avatar_url: '',
-    name: '',
-    login: '',
-    public_repos: '',
-    followers: '',
-    follows: []
+    user: '',
+    userInfo: {},
+    followers: []
 }
 
   componentDidMount() {
-    axios.get('https://api.github.com/users/kimnivore')
+    axios.get(`https://api.github.com/users/${this.state.user}`)
       .then(resp => {
         // console.log(resp.data);
         this.setState({
           ...this.state,
-          avatar_url: resp.data.avatar_url,
-          name: resp.data.name,
-          login: resp.data.login,
-          public_repos: resp.data.public_repos,
-          followers: resp.data.followers
+          user: resp.data
         })
       })
   }
 
-    componentDidMount() {
-      axios.get('https://api.github.com/users/kimnivore/followers')
+    componentDidUpdate(prevProps, prevState) {
+      if(this.state.user !== prevState.user) {
+      axios.get(`https://api.github.com/users/${this.state.user}/followers`)
       .then(resp => {
         // console.log(resp.data)
         this.setState({
           ...this.state,
-          follows: resp.data
+          followers: resp.data
         })
       })
-    }
+    }}
+
+  handleClick = (e) => {
+    this.setState({
+      ...this.state,
+      user: e.target.value
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log('clicked');
+    axios.get(`https://api.github.com/users/${this.state.user}`)
+    .then(resp => {
+      this.setState({
+        ...this.state,
+        user: resp.data
+      })
+    })
+  }
+
   render() {
     return(<div>
 
       <h1>Github Info</h1>
-
-      <div>
-        <input />
+      <form onSubmit={this.handleSubmit}>
+        <input placeholder="Github Handle" onChange={this.handleClick}/>
         <button>Search</button>
-      </div>
+      </form>
       
       <div>
-        <User avatar_url={this.state.avatar_url} name={this.state.name} login={this.state.login} public_repos={this.state.public_repos} followers={this.state.followers}/> 
-      </div>
-        <FollowerList />
-      <div>
+        <User userInfo={this.state.userInfo}/>
         <h2>Followers: </h2>
-       
+        <FollowerList followers={this.state.followers}/>
       </div>
 
     </div>);
@@ -64,3 +73,4 @@ class App extends React.Component {
 }
 
 export default App;
+
