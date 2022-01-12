@@ -43,12 +43,12 @@ class App extends React.Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      // console.log('clicked');
+      console.log('clicked');
       axios.get(`https://api.github.com/users/${this.state.user}`)
       .then(resp => {
         this.setState({
           ...this.state,
-          user: resp.data
+          userInfo: resp.data
         })
       })
     }
@@ -64,7 +64,6 @@ class App extends React.Component {
         
         <div>
           <User userInfo={this.state.userInfo}/>
-          <h2>Followers: </h2>
           <FollowerList followers={this.state.followers}/>
         </div>
 
