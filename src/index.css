@@ -16,12 +16,13 @@ img {
   margin: 10px;
 }
 
-h3 {
+
+h1, h2, h3 {
   font-weight: bold;
   color: purple
 }
 
-input{
+h1, input{
   margin: 30px;
   
 }
