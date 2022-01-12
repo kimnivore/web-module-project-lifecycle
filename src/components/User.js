@@ -7,7 +7,7 @@ class User extends React.Component {
             <div className='user'>
                 <div>
                     <img width='200' src={userInfo.avatar_url} />
-                    <a href={userInfo.html_url}> <h3>{userInfo.name}</h3></a>
+                    <a href={userInfo.html_url}> <h2>{userInfo.name}</h2></a>
                     <p>({userInfo.login})</p>
                     <p>Total Repos: {userInfo.public_repos}</p>
                     <p>Total Followers: {userInfo.followers}</p>

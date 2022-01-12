@@ -22,28 +22,31 @@ h3 {
 }
 
 input{
-  margin: 0 10px;
+  margin: 30px;
   
 }
 .user {
   display: flex;
   border: 1px black solid;
-  margin: 10px;
+  margin: auto;
   padding: 10px;
-  width: 40%;
+  width: 90%;
 }
 
 .followers {
-  display: flex-wrap;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   width: 90%;
   border: 1px gray solid;
-  margin: 10px;
+  margin: auto;
   padding: 10px;
 }
 
 .follow {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin: auto;
 }
